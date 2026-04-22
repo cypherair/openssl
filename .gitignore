@@ -1,5 +1,6 @@
 # Ignore editor artefacts
 /.dir-locals.el
+AGENTS.md
 
 # Top level excludes
 /Makefile.in
@@ -405,3 +406,13 @@ doc-nits
 # LSP (Language Server Protocol) support
 .cache/
 compile_commands.json
+<<<<<<< HEAD
+=======
+
+# coverage files
+*.gcda
+*.gcno
+lcov.info
+run_tests
+depend
+>>>>>>> 2907518b59 (docs: clarify arm64e Apple mobile target reuse)
