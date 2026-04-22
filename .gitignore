@@ -1,5 +1,6 @@
 # Ignore editor artefacts
 /.dir-locals.el
+AGENTS.md
 
 # Top level excludes
 /Makefile.in
@@ -436,4 +437,3 @@ compile_commands.json
 lcov.info
 run_tests
 depend
-
