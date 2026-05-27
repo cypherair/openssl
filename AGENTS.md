@@ -15,16 +15,15 @@ dependency chain.
 
 ## Related Forks
 
-- App experiment worktree:
-  - `/Users/tianren/coding/cypherair-apple-arm64e-unified-experiment`
+- App repository:
+  - `/Users/tianren/coding/cypherair-main`
+  - canonical branch: `main`
 - Rust fork:
   - `/Users/tianren/coding/rust`
-  - branch `codex/arm64e-darwin-ptrauth-spike`
+  - branch `carry/cypherair-arm64e-toolchain`
 - OpenSSL glue fork:
   - `/Users/tianren/coding/openssl-src-rs`
   - branch `carry/apple-arm64e-openssl-fork`
-- Related but currently unconfirmed in the active arm64e chain:
-  - `/Users/tianren/coding/rust-openssl`
 
 ## Current Role
 

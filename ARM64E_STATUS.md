@@ -1,6 +1,6 @@
 # OpenSSL arm64e Status
 
-Snapshot date: 2026-04-23
+Snapshot date: 2026-05-27
 
 ## Repo Identity
 
@@ -16,7 +16,7 @@ Snapshot date: 2026-04-23
 ## Role In The arm64e Chain
 
 This repo is where the OpenSSL-side Apple `arm64e` target definitions live for
-the current CypherAir experiment chain. The other forks depend on this repo to
+the current CypherAir app chain. The other forks depend on this repo to
 make the OpenSSL build system understand the relevant Apple `arm64e` targets.
 
 ## Current Progress
@@ -39,20 +39,20 @@ make the OpenSSL build system understand the relevant Apple `arm64e` targets.
 
 ## Related Forks And Paths
 
-- App experiment worktree:
-  - `/Users/tianren/coding/cypherair-apple-arm64e-unified-experiment`
+- App repository:
+  - `/Users/tianren/coding/cypherair-main`
+  - canonical branch: `main`
 - Rust fork:
   - `/Users/tianren/coding/rust`
+  - branch `carry/cypherair-arm64e-toolchain`
 - openssl-src-rs fork:
   - `/Users/tianren/coding/openssl-src-rs`
   - branch `carry/apple-arm64e-openssl-fork`
-- Related but currently unconfirmed in the active chain:
-  - `/Users/tianren/coding/rust-openssl`
 
 ## Upstreaming Posture
 
 - `prep` is the upstream-facing line.
-- `carry` is the branch that keeps the current experiment chain working.
+- `carry` is the branch that keeps the current app chain working.
 - Do not assume that the carry branch is a simple fast-forwardable "ahead of
   upstream" branch; it is a downstream support line with its own history.
 
