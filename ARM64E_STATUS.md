@@ -1,6 +1,6 @@
 # OpenSSL arm64e Status
 
-Snapshot date: 2026-05-27
+Snapshot date: 2026-07-16
 
 ## Repo Identity
 
@@ -21,6 +21,13 @@ make the OpenSSL build system understand the relevant Apple `arm64e` targets.
 
 ## Current Progress
 
+- The carry line now includes the official upstream `openssl-3.6.3` release
+  (`aae016bfd52fcad2bc9657c2c782cfdf73b1ed5f`), which contains the June 2026
+  OpenSSL security fixes, while retaining the CypherAir Apple arm64e targets.
+- The arm64e Poly1305 assembly path now signs its selected block and emit
+  callbacks before storing them. This matches the compiler ABI's
+  zero-discriminator function-pointer signing and prevents `EXC_ARM_PAC_FAIL`
+  in Poly1305 and ChaCha20-Poly1305 operations.
 - The necessary downstream branch lines already exist.
 - The `prep` branch is the cleaner upstream-prep line.
 - The `carry` branch is the long-lived downstream support line and should be
@@ -44,7 +51,7 @@ make the OpenSSL build system understand the relevant Apple `arm64e` targets.
   - canonical branch: `main`
 - Rust fork:
   - `/Users/tianren/coding/rust`
-  - branch `carry/cypherair-arm64e-toolchain`
+  - branch `carry/cypherair-arm64e-toolchain-stable-1.97`
 - openssl-src-rs fork:
   - `/Users/tianren/coding/openssl-src-rs`
   - branch `carry/apple-arm64e-openssl-fork`

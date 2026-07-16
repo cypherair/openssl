@@ -20,7 +20,7 @@ dependency chain.
   - canonical branch: `main`
 - Rust fork:
   - `/Users/tianren/coding/rust`
-  - branch `carry/cypherair-arm64e-toolchain`
+  - branch `carry/cypherair-arm64e-toolchain-stable-1.97`
 - OpenSSL glue fork:
   - `/Users/tianren/coding/openssl-src-rs`
   - branch `carry/apple-arm64e-openssl-fork`
