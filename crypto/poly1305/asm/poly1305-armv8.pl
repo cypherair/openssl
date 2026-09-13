@@ -109,6 +109,13 @@ poly1305_init:
 	csel	$d0,$d0,$r0,eq
 	csel	$d1,$d1,$r1,eq
 
+#ifdef	__arm64e__
+	// Sign selected callbacks after all dispatch selection.
+	// Apple arm64e C function pointers use the IA key and zero discriminator.
+	paciza	$d0
+	paciza	$d1
+#endif
+
 #ifdef	__ILP32__
 	stp	w12,w13,[$len]
 #else
