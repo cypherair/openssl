@@ -164,7 +164,15 @@ extern unsigned int OPENSSL_armv8_rsa_neonized;
 #define AARCH64_VALID_CALL_TARGET
 #endif
 
-#if defined(__ARM_FEATURE_PAC_DEFAULT) && (__ARM_FEATURE_PAC_DEFAULT & 1) == 1 /* Signed with A-key */
+#if defined(__arm64e__)
+/*
+ * Apple arm64e signs return addresses with the B-key and SP, as its compiler
+ * does for C. Mach-O has no .note.gnu.property.
+ */
+#define GNU_PROPERTY_AARCH64_POINTER_AUTH 0
+#define AARCH64_SIGN_LINK_REGISTER hint #27 /* PACIBSP */
+#define AARCH64_VALIDATE_LINK_REGISTER hint #31 /* AUTIBSP */
+#elif defined(__ARM_FEATURE_PAC_DEFAULT) && (__ARM_FEATURE_PAC_DEFAULT & 1) == 1 /* Signed with A-key */
 #define GNU_PROPERTY_AARCH64_POINTER_AUTH \
     (1 << 1) /* Has Pointer Authentication */
 #define AARCH64_SIGN_LINK_REGISTER hint #25 /* PACIASP */

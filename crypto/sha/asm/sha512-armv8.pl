@@ -376,7 +376,7 @@ $code.=<<___;
 .align	6
 sha256_block_armv8:
 .Lv8_entry:
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp		x29,x30,[sp,#-16]!
 	add		x29,sp,#0
 
@@ -440,6 +440,7 @@ $code.=<<___;
 	st1.32		{$ABCD,$EFGH},[$ctx]
 
 	ldr		x29,[sp],#16
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	sha256_block_armv8,.-sha256_block_armv8
 #endif
@@ -642,7 +643,7 @@ $code.=<<___;
 sha256_block_neon:
 	AARCH64_VALID_CALL_TARGET
 .Lneon_entry:
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later
+	AARCH64_SIGN_LINK_REGISTER
 	stp	x29, x30, [sp, #-16]!
 	mov	x29, sp
 	sub	sp,sp,#16*4
@@ -734,6 +735,7 @@ $code.=<<___;
 
 	ldr	x29,[x29]
 	add	sp,sp,#16*4+16
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	sha256_block_neon,.-sha256_block_neon
 ___
@@ -754,7 +756,7 @@ $code.=<<___;
 .align	6
 sha512_block_armv8:
 .Lv8_entry:
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later
+	AARCH64_SIGN_LINK_REGISTER
 	stp		x29,x30,[sp,#-16]!
 	add		x29,sp,#0
 
@@ -837,6 +839,7 @@ $code.=<<___;
 	st1.64		{@H[0]-@H[3]},[$ctx]		// store context
 
 	ldr		x29,[sp],#16
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	sha512_block_armv8,.-sha512_block_armv8
 #endif

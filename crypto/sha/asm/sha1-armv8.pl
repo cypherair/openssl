@@ -193,7 +193,7 @@ sha1_block_data_order:
 	tst	w16,#ARMV8_SHA1
 	b.ne	.Lv8_entry
 
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp	x29,x30,[sp,#-96]!
 	add	x29,sp,#0
 	stp	x19,x20,[sp,#16]
@@ -240,6 +240,7 @@ $code.=<<___;
 	ldp	x25,x26,[sp,#64]
 	ldp	x27,x28,[sp,#80]
 	ldr	x29,[sp],#96
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	sha1_block_data_order,.-sha1_block_data_order
 ___
@@ -255,7 +256,7 @@ $code.=<<___;
 .align	6
 sha1_block_armv8:
 .Lv8_entry:
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp	x29,x30,[sp,#-16]!
 	add	x29,sp,#0
 
@@ -318,6 +319,7 @@ $code.=<<___;
 	st1.32	{$E}[0],[$ctx]
 
 	ldr	x29,[sp],#16
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	sha1_block_armv8,.-sha1_block_armv8
 

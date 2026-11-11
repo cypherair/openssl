@@ -128,8 +128,7 @@ ${prefix}_set_encrypt_key:
 .Lenc_key:
 ___
 $code.=<<___	if ($flavour =~ /64/);
-	AARCH64_VALID_CALL_TARGET
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp	x29,x30,[sp,#-16]!
 	add	x29,sp,#0
 ___
@@ -304,6 +303,7 @@ $code.=<<___;
 .Lenc_key_abort:
 	mov	x0,$ptr			// return value
 	`"ldr	x29,[sp],#16"		if ($flavour =~ /64/)`
+	`"AARCH64_VALIDATE_LINK_REGISTER"	if ($flavour =~ /64/)`
 	ret
 .size	${prefix}_set_encrypt_key,.-${prefix}_set_encrypt_key
 
@@ -465,7 +465,7 @@ $code.=<<___;
 ${prefix}_ecb_encrypt:
 ___
 $code.=<<___	if ($flavour =~ /64/);
-	AARCH64_VALID_CALL_TARGET
+	AARCH64_SIGN_LINK_REGISTER
 	subs	$len,$len,#16
 	// Original input data size bigger than 16, jump to big size processing.
 	b.ne    .Lecb_big_size
@@ -1237,6 +1237,7 @@ $code.=<<___	if ($flavour =~ /64/);
 ___
 $code.=<<___	if ($flavour =~ /64/);
 .Lecb_Final_abort:
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 ___
 $code.=<<___;
@@ -1260,8 +1261,7 @@ $code.=<<___;
 ${prefix}_cbc_encrypt:
 ___
 $code.=<<___	if ($flavour =~ /64/);
-	AARCH64_VALID_CALL_TARGET
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp	x29,x30,[sp,#-16]!
 	add	x29,sp,#0
 ___
@@ -1761,6 +1761,7 @@ $code.=<<___	if ($flavour !~ /64/);
 ___
 $code.=<<___	if ($flavour =~ /64/);
 	ldr	x29,[sp],#16
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 ___
 $code.=<<___;
@@ -1794,8 +1795,7 @@ $code.=<<___	if ($flavour =~ /64/);
 .type	${prefix}_ctr32_encrypt_blocks_unroll12_eor3,%function
 .align	5
 ${prefix}_ctr32_encrypt_blocks_unroll12_eor3:
-	AARCH64_VALID_CALL_TARGET
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp		x29,x30,[sp,#-80]!
 	stp		d8,d9,[sp, #16]
 	stp		d10,d11,[sp, #32]
@@ -2511,6 +2511,7 @@ ${prefix}_ctr32_encrypt_blocks_unroll12_eor3:
 	ldp		d12,d13,[sp, #48]
 	ldp		d14,d15,[sp, #64]
 	ldr		x29,[sp],#80
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	${prefix}_ctr32_encrypt_blocks_unroll12_eor3,.-${prefix}_ctr32_encrypt_blocks_unroll12_eor3
 ___
@@ -2539,8 +2540,7 @@ $code.=<<___;
 ${prefix}_ctr32_encrypt_blocks:
 ___
 $code.=<<___	if ($flavour =~ /64/);
-	AARCH64_VALID_CALL_TARGET
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp		x29,x30,[sp,#-16]!
 	add		x29,sp,#0
 ___
@@ -2962,6 +2962,7 @@ $code.=<<___	if ($flavour !~ /64/);
 ___
 $code.=<<___	if ($flavour =~ /64/);
 	ldr		x29,[sp],#16
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 ___
 $code.=<<___;

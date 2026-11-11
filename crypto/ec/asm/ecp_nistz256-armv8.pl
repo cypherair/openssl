@@ -1378,8 +1378,7 @@ $code.=<<___;
 .type	ecp_nistz256_ord_mul_mont,%function
 .align	4
 ecp_nistz256_ord_mul_mont:
-	AARCH64_VALID_CALL_TARGET
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp	x29,x30,[sp,#-64]!
 	add	x29,sp,#0
 	stp	x19,x20,[sp,#16]
@@ -1512,6 +1511,7 @@ $code.=<<___;
 	ldp	x21,x22,[sp,#32]
 	ldp	x23,x24,[sp,#48]
 	ldr	x29,[sp],#64
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	ecp_nistz256_ord_mul_mont,.-ecp_nistz256_ord_mul_mont
 
@@ -1522,8 +1522,7 @@ $code.=<<___;
 .type	ecp_nistz256_ord_sqr_mont,%function
 .align	4
 ecp_nistz256_ord_sqr_mont:
-	AARCH64_VALID_CALL_TARGET
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp	x29,x30,[sp,#-64]!
 	add	x29,sp,#0
 	stp	x19,x20,[sp,#16]
@@ -1663,6 +1662,7 @@ $code.=<<___;
 	ldp	x21,x22,[sp,#32]
 	ldp	x23,x24,[sp,#48]
 	ldr	x29,[sp],#64
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	ecp_nistz256_ord_sqr_mont,.-ecp_nistz256_ord_sqr_mont
 ___
@@ -1679,8 +1679,7 @@ $code.=<<___;
 .type	ecp_nistz256_scatter_w5,%function
 .align	4
 ecp_nistz256_scatter_w5:
-	AARCH64_VALID_CALL_TARGET
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp	x29,x30,[sp,#-16]!
 	add	x29,sp,#0
 
@@ -1734,6 +1733,7 @@ ecp_nistz256_scatter_w5:
 	str	w7,[$out,#64*7-4]
 
 	ldr	x29,[sp],#16
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	ecp_nistz256_scatter_w5,.-ecp_nistz256_scatter_w5
 
@@ -1743,8 +1743,7 @@ ecp_nistz256_scatter_w5:
 .type	ecp_nistz256_gather_w5,%function
 .align	4
 ecp_nistz256_gather_w5:
-	AARCH64_VALID_CALL_TARGET
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp	x29,x30,[sp,#-16]!
 	add	x29,sp,#0
 
@@ -1813,6 +1812,7 @@ ecp_nistz256_gather_w5:
 	stp	x6,x7,[$out,#80]
 
 	ldr	x29,[sp],#16
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	ecp_nistz256_gather_w5,.-ecp_nistz256_gather_w5
 
@@ -1822,8 +1822,7 @@ ecp_nistz256_gather_w5:
 .type	ecp_nistz256_scatter_w7,%function
 .align	4
 ecp_nistz256_scatter_w7:
-	AARCH64_VALID_CALL_TARGET
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp	x29,x30,[sp,#-16]!
 	add	x29,sp,#0
 
@@ -1859,6 +1858,7 @@ ecp_nistz256_scatter_w7:
 	b.ne	.Loop_scatter_w7
 
 	ldr	x29,[sp],#16
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	ecp_nistz256_scatter_w7,.-ecp_nistz256_scatter_w7
 
@@ -1868,8 +1868,7 @@ ecp_nistz256_scatter_w7:
 .type	ecp_nistz256_gather_w7,%function
 .align	4
 ecp_nistz256_gather_w7:
-	AARCH64_VALID_CALL_TARGET
-	// Armv8.3-A PAuth: even though x30 is pushed to stack it is not popped later.
+	AARCH64_SIGN_LINK_REGISTER
 	stp	x29,x30,[sp,#-16]!
 	add	x29,sp,#0
 
@@ -1910,6 +1909,7 @@ ecp_nistz256_gather_w7:
 	b.ne	.Loop_gather_w7
 
 	ldr	x29,[sp],#16
+	AARCH64_VALIDATE_LINK_REGISTER
 	ret
 .size	ecp_nistz256_gather_w7,.-ecp_nistz256_gather_w7
 ___

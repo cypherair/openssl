@@ -1034,6 +1034,7 @@ ossl_bsaes_cbc_encrypt:
 
         // it is up to the caller to make sure we are called with enc == 0
 
+        AARCH64_SIGN_LINK_REGISTER
         stp     x29, x30, [sp, #-48]!
         stp     d8, d9, [sp, #16]
         stp     d10, d15, [sp, #32]
@@ -1263,6 +1264,7 @@ ossl_bsaes_cbc_encrypt:
         ldp     d8, d9, [sp, #16]
         ldp     d10, d15, [sp, #32]
         ldp     x29, x30, [sp], #48
+        AARCH64_VALIDATE_LINK_REGISTER
         ret
 .size   ossl_bsaes_cbc_encrypt,.-ossl_bsaes_cbc_encrypt
 
@@ -1279,7 +1281,7 @@ ossl_bsaes_cbc_encrypt:
 //   Output text filled in
 //   No output registers, usual AAPCS64 register preservation
 ossl_bsaes_ctr32_encrypt_blocks:
-        AARCH64_VALID_CALL_TARGET
+        AARCH64_SIGN_LINK_REGISTER
         cmp     x2, #8                      // use plain AES for
         blo     .Lctr_enc_short             // small sizes
 
@@ -1420,6 +1422,7 @@ ossl_bsaes_ctr32_encrypt_blocks:
         ldp     d12, d13, [sp, #48]
         ldp     d14, d15, [sp, #64]
         ldp     x29, x30, [sp], #80
+        AARCH64_VALIDATE_LINK_REGISTER
         ret
 
 .Lctr_enc_short:
@@ -1468,6 +1471,7 @@ ossl_bsaes_ctr32_encrypt_blocks:
         ldp     x21, x22, [sp, #32]
         ldp     x19, x20, [sp, #16]
         ldp     x29, x30, [sp], #96
+        AARCH64_VALIDATE_LINK_REGISTER
         ret
 .size   ossl_bsaes_ctr32_encrypt_blocks,.-ossl_bsaes_ctr32_encrypt_blocks
 
@@ -1485,7 +1489,7 @@ ossl_bsaes_ctr32_encrypt_blocks:
 //   Output ciphertext filled in
 //   No output registers, usual AAPCS64 register preservation
 ossl_bsaes_xts_encrypt:
-        AARCH64_VALID_CALL_TARGET
+        AARCH64_SIGN_LINK_REGISTER
         // Stack layout:
         // sp ->
         //        nrounds*128-96 bytes: key schedule
@@ -1908,6 +1912,7 @@ ossl_bsaes_xts_encrypt:
         ldp     d12, d13, [sp, #160]
         ldp     d14, d15, [sp, #176]
         ldp     x29, x30, [sp], #192
+        AARCH64_VALIDATE_LINK_REGISTER
         ret
 .size   ossl_bsaes_xts_encrypt,.-ossl_bsaes_xts_encrypt
 
@@ -1931,7 +1936,7 @@ ossl_bsaes_xts_encrypt:
 //   Output plaintext filled in
 //   No output registers, usual AAPCS64 register preservation
 ossl_bsaes_xts_decrypt:
-        AARCH64_VALID_CALL_TARGET
+        AARCH64_SIGN_LINK_REGISTER
         // Stack layout:
         // sp ->
         //        nrounds*128-96 bytes: key schedule
@@ -2385,5 +2390,6 @@ ossl_bsaes_xts_decrypt:
         ldp     d12, d13, [sp, #160]
         ldp     d14, d15, [sp, #176]
         ldp     x29, x30, [sp], #192
+        AARCH64_VALIDATE_LINK_REGISTER
         ret
 .size   ossl_bsaes_xts_decrypt,.-ossl_bsaes_xts_decrypt
